@@ -1,10 +1,9 @@
 def eval_formula(formula: str) -> bool:
     symbol = "01!&|^>="
-    operator = "!&|^>="
+    binary_op = "&|^>="
     stack = []
 
     dict_op = {
-        '!': lambda a, b: a != b,
         '&': lambda a, b: a & b,
         '|': lambda a, b: a | b,
         '^': lambda a, b: a ^ b,
@@ -15,13 +14,19 @@ def eval_formula(formula: str) -> bool:
         if c not in symbol :
             print("Wrong input")
             return None
-        if c in operator:
+        if c in binary_op:
             if len(stack) < 2:
                 print("Error: not enough operands")
                 return None
             b = stack.pop()
             a = stack.pop()
             stack.append(dict_op[c](a, b))
+        elif c == '!':
+            if len(stack) < 1:
+                print("Error: not enough operands")
+                return None
+            a = stack.pop()
+            stack.append(not a)  
         elif c in "01":
             stack.append(bool(int(c)))
     if len(stack) == 1:
@@ -35,7 +40,8 @@ def main():
     print(eval_formula("10|"))
     print(eval_formula("11>"))
     print(eval_formula("10="))
-    print(eval_formula("10111||="))
+    print(eval_formula("1011||="))
+    print(eval_formula("11!^"))
 
 if __name__ == "__main__":
     main()
