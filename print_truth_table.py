@@ -25,7 +25,7 @@ def print_truth_table(formula: str):
         print("Error: Duplicate variables found")
         return None
     
-    variables = sorted(set(c for c in formula if c.isalpha()))
+    variables = tuple(c for c in formula if c.isalpha())
     nb_vars = len(variables)
         
     if nb_vars == 0:
@@ -69,9 +69,15 @@ def print_truth_table(formula: str):
             if c.isalpha():
                 stack.append(var_values[c])
             elif c == '!':
+                if len(stack) < 1:
+                    print("Error: not enough operands")
+                    return None
                 a = stack.pop()
                 stack.append(dict_op['!'](a))
             elif c in binary_ops:
+                if len(stack) < 2:
+                    print("Error: not enough operands")
+                    return None
                 b = stack.pop()
                 a = stack.pop()
                 stack.append(dict_op[c](a, b))
@@ -81,12 +87,15 @@ def print_truth_table(formula: str):
         print("| " + row + " |")
 
 def main():
-    print_truth_table("AB&C")
-    print_truth_table("POJ|")
-    print_truth_table("FTG>")
-    print_truth_table("A=")
+    print_truth_table("AB&A|")
+    print("-------------------------")
+    print_truth_table("POJ||")
+    print("-------------------------")
+    print_truth_table("FTG>&")
+    print("-------------------------") 
+    print_truth_table("AW==")
+    print("-------------------------")
     print_truth_table("WERTY||=")
-    print_truth_table("AB&C|")
 
 if __name__ == "__main__":
     main()
