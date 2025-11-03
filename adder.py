@@ -7,6 +7,7 @@ def adder(a: int, b: int) -> int:
         b = R
     return a
 
+
 def main():
     print(adder(4, 5))
     print(adder(10, 50))

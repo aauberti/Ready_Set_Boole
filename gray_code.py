@@ -1,6 +1,7 @@
 def gray_code(n: int) -> int:
     return n ^ (n >> 1)
 
+
 def main():
     print(gray_code(0))
     print(gray_code(1))
@@ -11,6 +12,7 @@ def main():
     print(gray_code(6))
     print(gray_code(7))
     print(gray_code(8))
+
 
 if __name__ == "__main__":
     main()

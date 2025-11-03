@@ -7,11 +7,12 @@ def eval_formula(formula: str) -> bool:
         '&': lambda a, b: a & b,
         '|': lambda a, b: a | b,
         '^': lambda a, b: a ^ b,
-        '>': lambda a, b: not(a) or b,
+        '>': lambda a, b: not (a) or b,
         '=': lambda a, b: a == b
     }
+
     for c in formula:
-        if c not in symbol :
+        if c not in symbol:
             print("Wrong input")
             return None
         if c in binary_op:
@@ -26,7 +27,7 @@ def eval_formula(formula: str) -> bool:
                 print("Error: not enough operands")
                 return None
             a = stack.pop()
-            stack.append(not a)  
+            stack.append(not a)
         elif c in "01":
             stack.append(bool(int(c)))
     if len(stack) == 1:
@@ -35,6 +36,7 @@ def eval_formula(formula: str) -> bool:
         print("Error: invalid formula")
         return None
 
+
 def main():
     print(eval_formula("10&"))
     print(eval_formula("10|"))
@@ -42,6 +44,7 @@ def main():
     print(eval_formula("10="))
     print(eval_formula("1011||="))
     print(eval_formula("11!^"))
+
 
 if __name__ == "__main__":
     main()
