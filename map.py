@@ -1,4 +1,4 @@
-def map(x: int, y: int) -> int | None:
+def map(x: int, y: int) -> float | None:
     if not (0 <= x <= 65535 and 0 <= y <= 65535):
         print("Error: values must be between 0 and 65535")
         return None

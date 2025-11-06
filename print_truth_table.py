@@ -14,17 +14,7 @@ def print_truth_table(formula: str):
         '!': lambda a: not a
     }
 
-    for c in formula:
-        if c not in valid_chars:
-            print("Wrong input")
-            return None
-
-    all_variables = [c for c in formula if c.isalpha()]
-    if len(all_variables) != len(set(all_variables)):
-        print("Error: Duplicate variables found")
-        return None
-
-    variables = tuple(c for c in formula if c.isalpha())
+    variables = tuple(dict.fromkeys(c for c in formula if c.isalpha()))
     nb_vars = len(variables)
 
     if nb_vars == 0:
@@ -35,6 +25,9 @@ def print_truth_table(formula: str):
     stack_test = []
 
     for c in formula:
+        if c not in valid_chars:
+            print("Wrong input")
+            return None
         if c.isalpha():
             stack_test.append(var_values_test[c])
         elif c == '!':
@@ -89,13 +82,13 @@ def print_truth_table(formula: str):
 def main():
     print_truth_table("AB&A|")
     print("-------------------------")
-    print_truth_table("POJ||")
+    print_truth_table("AB&C|")
     print("-------------------------")
-    print_truth_table("FTG>&")
-    print("-------------------------")
-    print_truth_table("AW==")
-    print("-------------------------")
-    print_truth_table("WERTY||=")
+    # print_truth_table("FTG>&")
+    # print("-------------------------")
+    # print_truth_table("AW==")
+    # print("-------------------------")
+    # print_truth_table("WERTY||=")
 
 
 if __name__ == "__main__":

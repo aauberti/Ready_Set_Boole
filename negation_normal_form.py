@@ -53,9 +53,9 @@ def eliminate_complex_ops(node):
     elif node.op == '>':
         return Node('|', Node('!', left), right)
     elif node.op == '=':
-        return Node('|',
-                    Node('&', Node('!', left), Node('!', right)),
-                    Node('&', left, right))
+        return Node('&',
+                    Node('|', Node('!', left), right),
+                    Node('|', Node('!', right), left))
     else:
         return Node(node.op, left, right)
 
